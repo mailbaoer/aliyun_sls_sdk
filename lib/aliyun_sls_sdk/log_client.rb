@@ -43,16 +43,7 @@ module AliyunSlsSdk
     end
 
 
-    def get_logs(project_name, logstore_name)
-      query = "* | select count(1) as pv, case when http_user_agent like '%iOS%' then 'iOS' when http_user_agent like '%android%' then 'Android' else 'web' end as http_user_agent  group by case when http_user_agent like '%iOS%' then 'iOS' when http_user_agent like '%android%' then 'Android' else 'web' end   order by http_user_agent desc limit 10"
-
-      headers = {}
-      params = {
-        from: 1.hours.ago.to_i,
-        query: query,
-        to: Time.now.to_i,
-        type: 'log'
-      }
+    def get_logs(project_name, logstore_name, query, params)
       resource = "/logstores/" + logstore_name
       resp, header = send("GET", project_name, nil, resource, params, headers)
       #return GetLogStoreResponse.new(resp, header)
