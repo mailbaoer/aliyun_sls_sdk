@@ -43,7 +43,7 @@ module AliyunSlsSdk
     end
 
 
-    def get_logs(project_name, logstore_name, query, params)
+    def get_logs(project_name, logstore_name, params)
       resource = "/logstores/" + logstore_name
       resp, header = send("GET", project_name, nil, resource, params, headers)
       #return GetLogStoreResponse.new(resp, header)
